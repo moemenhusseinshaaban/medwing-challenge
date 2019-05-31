@@ -14,10 +14,7 @@ Challenge is using RSWAG gem for documenting the apis and allow us to test the a
 Challenge is using Sidekiq to allow to save the reading record in a background job
 
 Challenge is using Redis for caching the data to be able to be retrieved without even saved in the database, also allow us to cash the statistics in order to
-retrieve statistics with complexity O(1)   
-
-## Prerequisite
-
+retrieve statistics with complexity O(1)
 
 ## Installation
 
