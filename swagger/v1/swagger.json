@@ -1,0 +1,160 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/authenticate": {
+      "post": {
+        "summary": "Retrieves a token",
+        "tags": [
+          "Authentication"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "authentication",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "household_token": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "household_token"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns authentication_token"
+          },
+          "401": {
+            "description": "Invalid Household Token"
+          },
+          "422": {
+            "description": "Required Household Token"
+          }
+        }
+      }
+    },
+    "/api/readings": {
+      "post": {
+        "summary": "Creates a reading",
+        "tags": [
+          "Readings"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "required": "true",
+            "in": "header",
+            "type": "string",
+            "description": "Household Token (Required)"
+          },
+          {
+            "name": "reading",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "temperature": {
+                  "type": "float"
+                },
+                "humidity": {
+                  "type": "float"
+                },
+                "battery_charge": {
+                  "type": "float"
+                }
+              },
+              "required": [
+                "thermostat_id",
+                "temperature",
+                "humidity",
+                "battery_charge'"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "reading created"
+          }
+        }
+      }
+    },
+    "/api/readings/{id}": {
+      "get": {
+        "summary": "Retrieves a reading",
+        "tags": [
+          "Readings"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "required": "true",
+            "in": "header",
+            "type": "string",
+            "description": "Household Token (Required)"
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string",
+            "description": "Reading Id (Required)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "reading found"
+          },
+          "404": {
+            "description": "reading not found"
+          }
+        }
+      }
+    },
+    "/api/thermostats/statistics": {
+      "get": {
+        "summary": "Retrieves thermostat statistics",
+        "tags": [
+          "Thermostats"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "required": "true",
+            "in": "header",
+            "type": "string",
+            "description": "Household Token (Required)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return Thermostats Reading Statistics"
+          }
+        }
+      }
+    }
+  }
+}
