@@ -27,7 +27,7 @@ describe 'Reading API' do
       response '201', 'reading created' do
         it 'should return 201 with the new sequence_number of the current thermostat as a reading_id' do
           reading_params = {temperature: 1, humidity: 2, battery_charge: 3}
-          sequence_number = 
+          sequence_number = 1
           allow(ThermostatCachingService).to receive(:update_reading_number).and_return(sequence_number)
           allow(ThermostatCachingService).to receive(:cache_new_reading)
           post api_readings_path, params: {reading: reading_params},
